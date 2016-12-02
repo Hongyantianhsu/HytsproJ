@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.bsz.widget.PagerSlidingTabStrip
+        android:layout_weight="0.5"
+        android:id="@+id/tabs_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" >
+    </com.bsz.widget.PagerSlidingTabStrip>
+
+    <android.support.v4.view.ViewPager
+        android:layout_weight="8.5"
+        android:id="@+id/pager_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" >
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

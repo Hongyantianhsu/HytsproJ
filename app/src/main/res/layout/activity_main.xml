@@ -1,0 +1,82 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.toolbar.MainActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 内容界面 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_weight="1"
+                android:id="@+id/fr_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/Gray01" />
+
+            <RadioGroup
+                android:id="@+id/main_radio"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="bottom"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="2dp" >
+
+                <RadioButton
+                    android:id="@+id/rb_home"
+                    style="@style/main_tab_bottom"
+                    android:drawableTop="@drawable/selector_tab_homepage"
+                    android:text="@string/tab_home" />
+
+                <RadioButton
+                    android:id="@+id/rb_find"
+                    style="@style/main_tab_bottom"
+                    android:drawableTop="@drawable/selector_tab_community"
+                    android:text="@string/tab_find" />
+
+                <RadioButton
+                    android:id="@+id/rb_news"
+                    style="@style/main_tab_bottom"
+                    android:drawableTop="@drawable/selector_tab_news"
+                    android:text="@string/tab_news" />
+
+                <RadioButton
+                    android:id="@+id/rb_me"
+                    style="@style/main_tab_bottom"
+                    android:drawableTop="@drawable/selector_tab_me"
+                    android:text="@string/tab_me" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- 侧滑菜单内容 -->
+
+        <FrameLayout
+            android:id="@+id/drawer_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:padding="8dp">
+        </FrameLayout>
+    </android.support.v4.widget.DrawerLayout>
+
+</LinearLayout>
