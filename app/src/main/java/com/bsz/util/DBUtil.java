@@ -4,8 +4,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.bsz.dao.DaoMaster;
 import com.bsz.dao.DaoSession;
-import com.bsz.dao.DownInfo;
-import com.bsz.dao.DownInfoDao;
+import com.bsz.dao.SaveInfo;
+import com.bsz.dao.SaveInfoDao;
 
 import org.greenrobot.greendao.query.QueryBuilder;
 
@@ -55,35 +55,35 @@ public class DBUtil {
         return db;
     }
 
-    public void save(DownInfo info){
+    public void save(SaveInfo info){
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
-        DownInfoDao downInfoDao = daoSession.getDownInfoDao();
+        SaveInfoDao downInfoDao = daoSession.getSaveInfoDao();
         downInfoDao.insert(info);
     }
 
-    public void update(DownInfo info){
+    public void update(SaveInfo info){
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
-        DownInfoDao downInfoDao = daoSession.getDownInfoDao();
+        SaveInfoDao downInfoDao = daoSession.getSaveInfoDao();
         downInfoDao.update(info);
     }
 
-    public void deleteDowninfo(DownInfo info){
+    public void deleteDowninfo(SaveInfo info){
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
-        DownInfoDao downInfoDao = daoSession.getDownInfoDao();
+        SaveInfoDao downInfoDao = daoSession.getSaveInfoDao();
         downInfoDao.delete(info);
     }
 
 
-    public DownInfo queryDownBy(long Id) {
+    public SaveInfo queryDownBy(long Id) {
         DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
         DaoSession daoSession = daoMaster.newSession();
-        DownInfoDao downInfoDao = daoSession.getDownInfoDao();
-        QueryBuilder<DownInfo> qb = downInfoDao.queryBuilder();
-        qb.where(DownInfoDao.Properties.Id.eq(Id));
-        List<DownInfo> list = qb.list();
+        SaveInfoDao downInfoDao = daoSession.getSaveInfoDao();
+        QueryBuilder<SaveInfo> qb = downInfoDao.queryBuilder();
+        qb.where(SaveInfoDao.Properties.Id.eq(Id));
+        List<SaveInfo> list = qb.list();
         if(list.isEmpty()){
             return null;
         }else{
@@ -91,11 +91,11 @@ public class DBUtil {
         }
     }
 
-    public List<DownInfo> queryDownAll() {
+    public List<SaveInfo> queryDownAll() {
         DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
         DaoSession daoSession = daoMaster.newSession();
-        DownInfoDao downInfoDao = daoSession.getDownInfoDao();
-        QueryBuilder<DownInfo> qb = downInfoDao.queryBuilder();
+        SaveInfoDao downInfoDao = daoSession.getSaveInfoDao();
+        QueryBuilder<SaveInfo> qb = downInfoDao.queryBuilder();
         return qb.list();
     }
 }

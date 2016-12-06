@@ -1,1 +1,1 @@
-include ':app', ':ptr-lib', ':lib'
+include ':app', ':ptr-lib', ':lib', ':greendao'

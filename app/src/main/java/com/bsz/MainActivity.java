@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 
+import com.bsz.dao.SaveInfo;
 import com.bsz.fragment.BaseFragment;
 import com.bsz.fragment.FindFragment;
 import com.bsz.fragment.HomeFragment;
@@ -19,7 +20,11 @@ import com.bsz.fragment.MeFragment;
 import com.bsz.fragment.NewsFragment;
 import com.bsz.holder.MenuHolder;
 import com.bsz.util.ColorUtils;
+import com.bsz.util.DBUtil;
+import com.bsz.util.L;
 import com.bsz.util.UIUtils;
+
+import java.util.List;
 
 /**
  * 主界面Activity
@@ -77,10 +82,17 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 fragment.show();
                 break;
             case R.id.rb_find:
+                SaveInfo info = new SaveInfo();
+                info.setUrl("1111");
+                info.setSavePath("jjjjj");
+                DBUtil.getInstance().save(info);
+
                 fragment = new FindFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fr_content,fragment,"FIND").commit();
                 break;
             case R.id.rb_news:
+                List<SaveInfo> daoinfo = DBUtil.getInstance().queryDownAll();
+                L.e("kkk" + daoinfo.size()+"  "+daoinfo.get(0).getSavePath());
                 fragment = new NewsFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fr_content,fragment,"NEWS").commit();
                 break;
