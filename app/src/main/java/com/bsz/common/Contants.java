@@ -6,10 +6,10 @@ package com.bsz.common;
  */
 public class Contants {
 
-    public static final String HOST = "http://app.novatarot.com/index.php/Api";
+    public static final String HOST = "http://app.novatarot.com/index.php/Api/";
 
     // 登录注册code
-    public static final String LOGIN_CODE_URI = HOST + "/User/code";
+    public static final String LOGIN_CODE_URI = HOST + "User/code";
     // 上传图片
     public static final String UPLOADING_URI = HOST + "/Common/uploadimg";
     // 用户登录验证
@@ -304,6 +304,6 @@ public class Contants {
     public static String SELECT_CONSULTTIME = HOST + "/Consult/selectConsultTime";
 
     //获取账户余额
-    public static String GETBALANE = HOST + "/Personal/getBalance";
+    public static String GETBALANE = HOST + "Personal/getBalance";
 }
 

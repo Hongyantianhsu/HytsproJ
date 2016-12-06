@@ -1,90 +1,88 @@
 package com.bsz.util;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
-import retrofit2.http.GET;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
- * 网络请求工具类
+ * 网络请求工具类RxJava+Retrofit
  * Created by sunyan on 16/11/30.
  */
 public class HttpUtil {
-    public static final String HOST = "http://app.novatarot.com/index.php/Api";
-    public static void retrofitPost(String HOST,String url){
+    private static String url = "http://www.izaodao.com/Api/";
+    private static HttpUtil httpUtil;
+    private static Retrofit retrofit;
+    private HttpUtil(){
+        okhttp3.OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(5, TimeUnit.SECONDS);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                //增加返回值为String的支持
-                .addConverterFactory(ScalarsConverterFactory.create())
-                        //增加返回值为Gson的支持(以实体类返回)
+        retrofit = new Retrofit.Builder()
+                .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
-                        //增加返回值为Oservable<T>的支持
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
-
-        RequestPostService service = retrofit.create(RequestPostService.class);
-        Call<String> call = service.getString("955688503", "111");
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
-    }
-
-    public static void retrofitGet(String url){
-        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
-                        //增加返回值为String的支持
-                .addConverterFactory(ScalarsConverterFactory.create())
-                        //增加返回值为Gson的支持(以实体类返回)
-                .addConverterFactory(GsonConverterFactory.create())
-                        //增加返回值为Oservable<T>的支持
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-
-        RequestGetService service1 = retrofit.create(RequestGetService.class);
-        Call<String> call = service1.getString("sunyan", "123456");
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
     }
 
-
-    public interface retrofitService{
-    }
-    public interface RequestPostService{
-        @POST(HOST)
-        Call<String> getString(@Query("uid") String uid,@Query("token") String token);
-    }
-
-    public interface RequestGetService{
-        @GET("{name},{pwd}")
-        Call<String> getString(@Path("name") String name, @Path("pwd") String pwd);
+    public synchronized static HttpUtil getInstance(){
+        if (httpUtil == null){
+            httpUtil = new HttpUtil();
+        }
+        return httpUtil;
     }
 
-    public interface RequestUploadService{
+    private Retrofit getRetrofit(){
+        return retrofit;
+    }
 
+    /**
+     * post请求例子
+     */
+    public void getB(){
+        HttpService httpService = retrofit.create(HttpService.class);
+//        Observable<String> observable = httpService.getBalance("144227242", "c7cdf4b757e24b2b14ea1ace6049d325");
+        Observable<String> observable = httpService.getBalance(true);
+        observable.subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        //可以设置进度条开始显示
+                        L.e("start");
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        //可以设置进度条消失
+                        L.e("completed");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        L.e("errro" + e);
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        //主线程
+                        L.e("onnext：" + s);
+                    }
+                });
+    }
+
+    public interface HttpService{
+        @POST("AppFiftyToneGraph/videoLink")
+        Observable<String> getBalance(@Body boolean once_no);
     }
 }

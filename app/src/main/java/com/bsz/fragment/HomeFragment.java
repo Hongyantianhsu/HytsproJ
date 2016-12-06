@@ -14,7 +14,7 @@ import android.view.View;
 import com.bsz.R;
 import com.bsz.page.LoadingPage.LoadResult;
 import com.bsz.util.ColorUtils;
-import com.bsz.util.RxJavaUtil;
+import com.bsz.util.HttpUtil;
 import com.bsz.util.UIUtils;
 import com.bsz.widget.PagerSlidingTabStrip;
 
@@ -30,7 +30,7 @@ public class HomeFragment extends BaseFragment{
     @Override
     public View createLoadedView() {
         view = View.inflate(UIUtils.getContext(), R.layout.fragment_home,null);
-        RxJavaUtil.rxJava();
+        HttpUtil.getInstance().getB();
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) view.findViewById(R.id.tabs_home);
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager_home);
         viewPager.setAdapter(new MyFragmentAdapter(getChildFragmentManager()));

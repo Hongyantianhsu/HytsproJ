@@ -55,6 +55,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
         mradioGroup.setOnCheckedChangeListener(this);
         mradioGroup.check(R.id.rb_home);
+
     }
 
     /**
