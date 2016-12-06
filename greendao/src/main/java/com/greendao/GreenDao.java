@@ -1,17 +1,14 @@
-package com.example;
+package com.greendao;
 
 import org.greenrobot.greendao.generator.DaoGenerator;
 import org.greenrobot.greendao.generator.Entity;
 import org.greenrobot.greendao.generator.Schema;
 
-/**
- * greenDao Java工程，用来自动生成android下的相关代码
- */
-public class MyClass {
+public class GreenDao {
     public static void main(String[] args) throws Exception{
         // 正如你所见的，你创建了一个用于添加实体（Entity）的模式（Schema）对象。
         // 两个参数分别代表：数据库版本号与自动生成代码的包路径。
-        Schema schema = new Schema(1, "com.bsz.dao");
+        Schema schema = new Schema(2, "com.bsz.dao");
 //      当然，如果你愿意，你也可以分别指定生成的 Bean 与 DAO 类所在的目录，只要如下所示：
 //      Schema schema = new Schema(1, "me.itangqi.bean");
 //      schema.setDefaultJavaPackageDao("me.itangqi.dao");
@@ -32,7 +29,7 @@ public class MyClass {
      */
     private static void addNote(Schema schema) {
         // 一个实体（类）就关联到数据库中的一张表，此处表名为「Note」（既类名）
-        Entity entity = schema.addEntity("DownInfo");
+        Entity entity = schema.addEntity("SaveInfo");
         // 你也可以重新给表命名
         // note.setTableName("NODE");
 
