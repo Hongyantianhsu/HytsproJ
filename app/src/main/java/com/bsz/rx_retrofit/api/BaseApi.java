@@ -1,9 +1,10 @@
 package com.bsz.rx_retrofit.api;
 
-import com.bsz.bean.HttpResult;
+import com.bsz.common.Contants;
+import com.bsz.entity.HttpResult;
 import com.bsz.exception.HttpTimeException;
+import com.bsz.rx_retrofit.http.HttpService;
 import com.bsz.rx_retrofit.listener.HttpOnNextListener;
-import com.bsz.util.HttpUtil;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.lang.ref.SoftReference;
@@ -27,7 +28,7 @@ public abstract class BaseApi<T> implements Func1<HttpResult<T>, T> {
     /*是否需要缓存处理*/
     private boolean cache;
     /*基础url*/
-    private  String baseUrl="http://www.izaodao.com/Api/";
+    private  String baseUrl= Contants.HOST;
     /*方法-如果需要缓存必须设置这个参数；不需要不用設置*/
     private String mothed;
     /*超时时间-默认6秒*/
@@ -50,7 +51,7 @@ public abstract class BaseApi<T> implements Func1<HttpResult<T>, T> {
      * @param methods
      * @return
      */
-    public abstract Observable getObservable(HttpUtil.HttpService methods);
+    public abstract Observable getObservable(HttpService methods);
 
 
 

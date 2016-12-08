@@ -2,7 +2,7 @@ package com.bsz.util;
 
 import android.widget.Toast;
 
-import com.bsz.bean.UserInfo;
+import com.bsz.entity.UserInfo;
 
 import rx.Observable;
 import rx.Observer;

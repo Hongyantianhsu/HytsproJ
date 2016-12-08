@@ -12,8 +12,13 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.bsz.R;
+import com.bsz.entity.BalanceEntity;
+import com.bsz.entity.api.TestHttpPostApi;
 import com.bsz.page.LoadingPage.LoadResult;
+import com.bsz.rx_retrofit.http.HttpManager;
+import com.bsz.rx_retrofit.listener.HttpOnNextListener;
 import com.bsz.util.ColorUtils;
+import com.bsz.util.L;
 import com.bsz.util.UIUtils;
 import com.bsz.widget.PagerSlidingTabStrip;
 
@@ -69,6 +74,34 @@ public class HomeFragment extends BaseFragment{
      */
     @Override
     public LoadResult load() {
+        HttpOnNextListener httpOnNextListener = new HttpOnNextListener<BalanceEntity>() {
+
+            @Override
+            public void onNext(BalanceEntity balanceEntity) {
+                L.e("home--onnext--"+balanceEntity.getBalance());
+            }
+
+            @Override
+            public void onCacheNext(String string) {
+                L.e("home--oncachenext--"+string);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                L.e("home--onerror--"+e);
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        };
+        TestHttpPostApi testHttpPostApi = new TestHttpPostApi(httpOnNextListener,null);
+        testHttpPostApi.setToken("dac1c7c7b8d27523ddaee42b7dbce3e5");
+        testHttpPostApi.setUid("144227242");
+        HttpManager httpManager = HttpManager.getInstance();
+        httpManager.getHttpResult(testHttpPostApi);
+
         return LoadResult.SUCCEED;
     }
 

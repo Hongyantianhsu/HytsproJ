@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.bsz.R;
-import com.bsz.bean.UserInfo;
+import com.bsz.entity.UserInfo;
 import com.bsz.util.UIUtils;
 
 /**

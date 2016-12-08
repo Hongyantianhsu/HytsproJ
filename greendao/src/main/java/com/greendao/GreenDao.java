@@ -18,16 +18,25 @@ public class GreenDao {
         // schema2.enableKeepSectionsByDefault();
 
         // 一旦你拥有了一个 Schema 对象后，你便可以使用它添加实体（Entities）了。
-        addNote(schema);
+        addSaveInfo(schema);//创建SaveInfo表
+        addCookieInfo(schema);//创建CookieInfo表
         // 最后我们将使用 DAOGenerator 类的 generateAll() 方法自动生成代码，此处你需要根据自己的情况更改输出目录（既之前创建的 java-gen)。
         // 其实，输出目录的路径可以在 build.gradle 中设置，有兴趣的朋友可以自行搜索，这里就不再详解。
         new DaoGenerator().generateAll(schema, "/Users/sunyan/Desktop/BuSuanZi/app/src/main/java-gen");
     }
 
+    private static void addCookieInfo(Schema schema) {
+        Entity entity1 = schema.addEntity("CookieInfo");
+        entity1.addIdProperty();
+        entity1.addStringProperty("url");
+        entity1.addStringProperty("result");
+        entity1.addLongProperty("time");
+    }
+
     /**
      * @param schema
      */
-    private static void addNote(Schema schema) {
+    private static void addSaveInfo(Schema schema) {
         // 一个实体（类）就关联到数据库中的一张表，此处表名为「Note」（既类名）
         Entity entity = schema.addEntity("SaveInfo");
         // 你也可以重新给表命名

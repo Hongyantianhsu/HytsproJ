@@ -1,4 +1,4 @@
-package com.bsz.bean;
+package com.bsz.entity;
 
 /**
  * Created by sunyan on 16/11/29.

@@ -69,7 +69,7 @@ public class DBUtil {
         downInfoDao.update(info);
     }
 
-    public void deleteDowninfo(SaveInfo info){
+    public void delete(SaveInfo info){
         DaoMaster daoMaster = new DaoMaster(getWritableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         SaveInfoDao downInfoDao = daoSession.getSaveInfoDao();
@@ -77,7 +77,7 @@ public class DBUtil {
     }
 
 
-    public SaveInfo queryDownBy(long Id) {
+    public SaveInfo queryById(long Id) {
         DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         SaveInfoDao downInfoDao = daoSession.getSaveInfoDao();
@@ -91,7 +91,21 @@ public class DBUtil {
         }
     }
 
-    public List<SaveInfo> queryDownAll() {
+    public SaveInfo queryByUrl(String url) {
+        DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
+        DaoSession daoSession = daoMaster.newSession();
+        SaveInfoDao downInfoDao = daoSession.getSaveInfoDao();
+        QueryBuilder<SaveInfo> qb = downInfoDao.queryBuilder();
+        qb.where(SaveInfoDao.Properties.Url.eq(url));
+        List<SaveInfo> list = qb.list();
+        if(list.isEmpty()){
+            return null;
+        }else{
+            return list.get(0);
+        }
+    }
+
+    public List<SaveInfo> queryAll() {
         DaoMaster daoMaster = new DaoMaster(getReadableDatabase());
         DaoSession daoSession = daoMaster.newSession();
         SaveInfoDao downInfoDao = daoSession.getSaveInfoDao();
