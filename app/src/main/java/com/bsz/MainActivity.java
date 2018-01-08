@@ -58,6 +58,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     }
 
+    private void initVariable(){}
+
     /**
      * 获取相应的fragment
      * @param id fragment标志
